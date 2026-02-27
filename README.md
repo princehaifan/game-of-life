@@ -17,14 +17,40 @@ The Game of Life is a cellular automaton devised by the British mathematician Jo
 1. Clone the repository:
    ```bash
    git clone https://github.com/princehaifan/game-of-life.git
-   ```  
+   ```
+
 2. Navigate into the project directory:
    ```bash
    cd game-of-life
    ```
-3. Run the application:
+
+3. Install dependencies:
    ```bash
-   <insert run command here>
+   pip install -r requirements.txt
+   ```
+
+4. Run the application:
+
+   **Windows (PowerShell or Command Prompt)**
+   ```powershell
+   python main.py
+   ```
+   > **Note:** Do not type the folder path as a command. PowerShell does not execute bare file paths.
+   > Always `cd` into the project folder first, then run `python main.py`.
+   > If your project folder path contains spaces (e.g. `C:\Users\Admin\Desktop\Python Coursework\game-of-life`), quote the path when changing directory:
+   > ```powershell
+   > cd "C:\Users\Admin\Desktop\Python Coursework\python coursework\game-of-life"
+   > python main.py
+   > ```
+
+   **macOS / Linux**
+   ```bash
+   python3 main.py
+   ```
+
+5. Run the tests:
+   ```bash
+   python -m pytest
    ```
 
 ### Contributing
