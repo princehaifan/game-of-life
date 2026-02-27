@@ -1,53 +1,53 @@
-import logging
-from typing import List, Optional
-
-# Configure logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
-class LifeTile:
-    def __init__(self, name: str, value: int):
-        self.name = name
-        self.value = value
-        logging.debug(f"LifeTile created: {self.name} with value {self.value}")
-
-
 class Career:
-    def __init__(self, title: str, salary: float):
+    def __init__(self, title, salary):
         self.title = title
         self.salary = salary
-        logging.debug(f"Career created: {self.title} with salary {self.salary}")
-
 
 class House:
-    def __init__(self, address: str, price: float):
-        self.address = address
+    def __init__(self, name, price):
+        self.name = name
         self.price = price
-        logging.debug(f"House created: {self.address} with price {self.price}")
 
+class LifeTile:
+    def __init__(self, description):
+        self.description = description
 
 class Player:
-    def __init__(self, name: str):
+    def __init__(self, name):
         self.name = name
-        self.career: Optional[Career] = None
-        self.house: Optional[House] = None
-        self.life_tiles: List[LifeTile] = []
-        logging.debug(f"Player created: {self.name}")
+        self.wealth = 0
+        self.career = None
+        self.house = None
 
-    def choose_career(self, title: str, salary: float):
-        if salary < 0:
-            logging.error(f"Invalid salary: {salary}")
-            raise ValueError("Salary must be a positive number")
-        self.career = Career(title, salary)
+    def display_status(self):
+        return f"{self.name} - Wealth: {self.wealth}, Career: {self.career.title if self.career else 'None'}, House: {self.house.name if self.house else 'None'}"
 
-    def buy_house(self, address: str, price: float):
-        if price <= 0:
-            logging.error(f"Invalid house price: {price}")
-            raise ValueError("House price must be greater than zero")
-        self.house = House(address, price)
+    def calculate_wealth(self):
+        return self.wealth
 
-    def add_life_tile(self, name: str, value: int):
-        self.life_tiles.append(LifeTile(name, value))
+    def add_money(self, amount):
+        self.wealth += amount
 
-    def __str__(self):
-        return f"Player {self.name} with career {self.career.title if self.career else 'None'}"
+    def spend_money(self, amount):
+        if amount <= self.wealth:
+            self.wealth -= amount
+        else:
+            raise ValueError("Insufficient funds")
+
+    def assign_career(self, career):
+        self.career = career
+
+    def assign_house(self, house):
+        self.house = house
+
+# Example instantiation
+if __name__ == "__main__":
+    player = Player("John")
+    career = Career("Engineer", 70000)
+    house = House("Villa", 300000)
+
+    player.assign_career(career)
+    player.assign_house(house)
+    player.add_money(150000)
+
+    print(player.display_status())
