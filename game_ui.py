@@ -1,16 +1,24 @@
 class GameUI:
     def __init__(self):
-        # Initialize the game UI
-        pass
-
-    def display_instructions(self):
-        # Display game instructions
-        print("Welcome to the Game of Life!")
-
-    def update_display(self, game_state):
-        # Update the UI with the current game state
-        pass
-
-    def get_user_input(self):
-        # Get input from the user
-        return input("Enter command: ")
+        self.messages = []
+    
+    def display_message(self, message):
+        print(message)
+        self.messages.append(message)
+    
+    def display_player_status(self, player):
+        status = f"{player.name} - Position: {player.position}, Cash: ${player.cash:,}"
+        self.display_message(status)
+    
+    def display_game_status(self, game):
+        self.display_message("=" * 50)
+        self.display_message("Game Status:")
+        for player in game.players:
+            self.display_player_status(player)
+        self.display_message("=" * 50)
+    
+    def get_player_choice(self, options):
+        for i, option in enumerate(options, 1):
+            print(f"{i}. {option}")
+        choice = int(input("Enter your choice: "))
+        return choice - 1
