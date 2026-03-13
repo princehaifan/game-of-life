@@ -1,8 +1,16 @@
-class Game:
+# Game of Life - Game
+
+
+class GameBase:
+
     def __init__(self):
+        super().__init__()
         self.players = []  # List to store player information
-        self.current_turn = 0  # To track whose turn it is
-        self.winner = None  # To store the winner of the game
+        self.current_turn = 0  # Track whose turn it is
+        self.winner = None  # Store the winner of the game
+
+
+class GameLogic(GameBase):
 
     def add_player(self, player_name):
         self.players.append(player_name)
@@ -18,7 +26,14 @@ class Game:
         # Logic to check if a player has met the win conditions
         pass  # Placeholder for win condition logic
 
+
+class Game(GameLogic):
+
+    def __init__(self):
+        super().__init__()
+
     def play(self):
+
         while not self.winner:
             current_player = self.players[self.current_turn]
             # Logic for player to take their turn
